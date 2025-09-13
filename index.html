@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherNow - Live Weather Updates</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="app">
+        <!-- Loading Screen -->
+        <div id="loading" class="loading-screen">
+            <div class="loading-spinner"></div>
+            <p>Getting weather data...</p>
+        </div>
+
+        <!-- Main App Content -->
+        <div id="main-content" class="main-content hidden">
+            <!-- Header -->
+            <header class="header">
+                <div class="container">
+                    <h1 class="app-title">WeatherNow</h1>
+                    <div class="location-info">
+                        <div id="current-location" class="current-location">
+                            <span id="city-name">Loading...</span>
+                            <span id="country-name"></span>
+                        </div>
+                        <div id="current-time" class="current-time"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Controls Section -->
+            <section class="controls-section">
+                <div class="container">
+                    <div class="controls-grid">
+                        <div class="search-container">
+                            <input 
+                                type="text" 
+                                id="city-search" 
+                                class="form-control search-input" 
+                                placeholder="Search for a city..."
+                                autocomplete="off"
+                            >
+                            <button id="search-btn" class="btn btn--primary search-btn">Search</button>
+                        </div>
+                        <div class="action-buttons">
+                            <button id="location-btn" class="btn btn--secondary location-btn">
+                                📍 Use My Location
+                            </button>
+                            <button id="unit-toggle" class="btn btn--outline unit-toggle">
+                                °C / °F
+                            </button>
+                            <button id="refresh-btn" class="btn btn--outline refresh-btn">
+                                🔄 Refresh
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Weather Card -->
+            <section class="weather-main">
+                <div class="container">
+                    <div class="weather-card">
+                        <div class="weather-primary">
+                            <div class="temperature-display">
+                                <span id="main-temperature" class="main-temp">--°</span>
+                                <div class="temp-details">
+                                    <span id="feels-like" class="feels-like">Feels like --°</span>
+                                    <span id="weather-description" class="weather-desc">--</span>
+                                </div>
+                            </div>
+                            <div class="weather-icon">
+                                <span id="weather-emoji" class="weather-emoji">🌤️</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Weather Details Grid -->
+            <section class="weather-details">
+                <div class="container">
+                    <div class="details-grid">
+                        <div class="detail-card">
+                            <div class="detail-header">
+                                <span class="detail-icon">💧</span>
+                                <span class="detail-label">Humidity</span>
+                            </div>
+                            <span id="humidity" class="detail-value">--%</span>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <div class="detail-header">
+                                <span class="detail-icon">🌬️</span>
+                                <span class="detail-label">Wind Speed</span>
+                            </div>
+                            <span id="wind-speed" class="detail-value">-- m/s</span>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <div class="detail-header">
+                                <span class="detail-icon">🌡️</span>
+                                <span class="detail-label">Pressure</span>
+                            </div>
+                            <span id="pressure" class="detail-value">-- hPa</span>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <div class="detail-header">
+                                <span class="detail-icon">👁️</span>
+                                <span class="detail-label">Visibility</span>
+                            </div>
+                            <span id="visibility" class="detail-value">-- km</span>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <div class="detail-header">
+                                <span class="detail-icon">🌅</span>
+                                <span class="detail-label">Sunrise</span>
+                            </div>
+                            <span id="sunrise" class="detail-value">--:--</span>
+                        </div>
+                        
+                        <div class="detail-card">
+                            <div class="detail-header">
+                                <span class="detail-icon">🌇</span>
+                                <span class="detail-label">Sunset</span>
+                            </div>
+                            <span id="sunset" class="detail-value">--:--</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-content">
+                        <p>Weather data provided by OpenWeatherMap</p>
+                        <p id="last-updated" class="last-updated">Last updated: --</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- Error Modal -->
+        <div id="error-modal" class="modal hidden">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>⚠️ Error</h3>
+                    <button id="close-modal" class="modal-close">×</button>
+                </div>
+                <div class="modal-body">
+                    <p id="error-message">An error occurred while fetching weather data.</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="retry-btn" class="btn btn--primary">Retry</button>
+                    <button id="dismiss-btn" class="btn btn--secondary">Dismiss</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
